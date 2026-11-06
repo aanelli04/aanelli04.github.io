@@ -956,7 +956,7 @@ h2 em {
 }
 
 .project-copy .text-link {
-  margin-top: 6px;
+  margin: 6px 20px 0 0;
 }
 
 .project-index {
@@ -1030,6 +1030,14 @@ h2 em {
   padding-bottom: 36px;
 }
 
+/* Long article titles read better a size down */
+.detail .intro h1 {
+  max-width: 900px;
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
 .article-body {
   max-width: 720px;
   padding-top: 36px;
@@ -1050,6 +1058,61 @@ h2 em {
 
 .article-body ul {
   padding-left: 20px;
+}
+
+.article-body ol {
+  padding-left: 22px;
+}
+
+.article-body li + li {
+  margin-top: 10px;
+}
+
+.article-body strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Figures inside articles */
+.figure {
+  margin: 28px 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.figure.narrow {
+  max-width: 520px;
+}
+
+.figure figcaption {
+  margin-top: 10px;
+  font: 12px/1.6 var(--mono);
+  letter-spacing: 0.02em;
+  color: var(--label);
+}
+
+.figure-pair {
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  gap: 14px;
+  align-items: start;
+  margin: 28px 0;
+}
+
+.figure-pair .figure {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .figure-pair {
+    grid-template-columns: 1fr;
+  }
 }
 
 .article-links {
@@ -1101,6 +1164,15 @@ h2 em {
 .contact-card > span {
   font: 12px var(--mono);
   color: #7ec4d4;
+}
+
+.teaching {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.teaching .button {
+  margin-top: 8px;
 }
 
 .contact-foot {

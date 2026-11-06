@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>
-      From simulation to the operating room: first prize at Siemens Healthineers — Alberto Anelli
+      First prize at the Siemens Healthineers Robotics & AI Hackathon 2026 — Alberto Anelli
     </title>
     <meta
       name="description"
-      content="In October 2026, our team π-SA won both the endovascular robotics challenge and the overall Siemens Healthineers Robotics & AI Hackathon in Erlangen."
+      content="In October 2026, team π-SA won the endovascular robotics challenge and the overall Siemens Healthineers Robotics & AI Hackathon in Erlangen with a simulation-to-VLA pipeline for autonomous guidewire and catheter navigation."
     />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <script defer src="../../assets/js/main.js"></script>
@@ -29,39 +29,147 @@
     <main class="wrap page detail">
       <a class="back" href="../../projects.html">← All projects & notes</a>
       <div class="intro">
-        <p class="eyebrow">Robotics & bionics · October 2026</p>
-        <h1>From simulation to the operating room: first prize at Siemens Healthineers</h1>
+        <p class="eyebrow">Medical robotics · October 2026 · Erlangen, Germany</p>
+        <h1>First prize at the Siemens Healthineers Robotics & AI Hackathon 2026</h1>
         <p class="lead">
-          In October 2026, our team π-SA won both the endovascular robotics challenge and the
-          overall Siemens Healthineers Robotics & AI Hackathon in Erlangen.
+          Team π-SA (Precision Intelligent Surgical Agent) won the endovascular robotics challenge
+          and the overall competition with a pipeline that turns a vessel model into expert
+          demonstrations and a policy that steers from fluoroscopy images.
         </p>
       </div>
       <article class="article-body">
+        <figure class="figure wide">
+          <img
+            src="../../assets/img/hackathon/award.jpg"
+            width="800"
+            height="529"
+            alt="Team π-SA on stage with the organisers at the award ceremony, in front of the 1st Prize slide"
+          />
+          <figcaption>
+            Award ceremony, Robotics & AI Hackathon 2026, Siemens Healthineers.
+          </figcaption>
+        </figure>
+
+        <h2>The problem</h2>
         <p>
-          The challenge was to make guidewires and catheters navigate autonomously during
-          endovascular procedures. Our team brought together robotics, computer science and bionics
-          engineering to connect simulation with control from real-world visual inputs.
+          In endovascular procedures, such as thrombectomy for ischaemic stroke, a thin and flexible
+          guidewire and catheter are pushed and rotated from outside the body through a branching
+          vessel tree, while the clinician sees only a 2D X-ray image. Challenge 3 asked teams to
+          make this navigation fully autonomous. The main bottleneck for learning it is data: expert
+          procedures cannot be recorded by hand in sufficient numbers.
         </p>
-        <h2>Training in simulation, acting on observation</h2>
+        <figure class="figure">
+          <img
+            src="../../assets/img/hackathon/vessel-tree-3d.jpg"
+            width="1400"
+            height="788"
+            loading="lazy"
+            alt="3D rendering of a vessel tree with a catheter entering from below"
+          />
+          <figcaption>A 3D vessel model, the starting point of each simulated task.</figcaption>
+        </figure>
+
+        <h2>Approach</h2>
         <p>
-          We built a parallelized physics simulator to generate demonstrations for privileged
-          reinforcement-learning experts trained with Soft Actor-Critic (SAC). We then distilled
-          those simulated rollouts into a vision-language-action policy, SmolVLA (450M), which
-          steers using fluoroscopy images and text instructions. The goal was to use rich privileged
-          information during training while relying on observable data at deployment.
+          We started from the HCMR-EV stack provided for the challenge, which already included a
+          simulator, an online Soft Actor-Critic (SAC) agent and imitation-learning scripts. Because
+          it was designed for deployment, its reinforcement learning ran in real time at 5 Hz with
+          noisy inputs only. Our key idea was to treat the reinforcement-learning policy not as the
+          product but as a <strong>teacher</strong>: a teacher only has to produce good
+          demonstrations, so it may use privileged information that no real sensor provides.
         </p>
+        <figure class="figure wide">
+          <img
+            src="../../assets/img/hackathon/pipeline-slide.jpg"
+            width="1600"
+            height="900"
+            loading="lazy"
+            alt="Slide summarising the four-stage pipeline: simulate, teach, record, imitation"
+          />
+          <figcaption>The four stages of the pipeline, from our final presentation.</figcaption>
+        </figure>
+        <ol>
+          <li>
+            <strong>Simulate.</strong> Xcath, a headless Python simulator: guidewire and catheter as
+            Cosserat rods solved with XPBD, wall contact and friction, and a model of the robot
+            actuators (delay and filter). Validated against the original JavaScript simulator, it
+            runs 22 environments in parallel on one machine — 44 hours of simulation in 8 hours.
+          </li>
+          <li>
+            <strong>Teach.</strong> One SAC expert per vessel (0.7 M parameters) with a privileged
+            observation of 353 values, including every force acting on both devices, trained with
+            curriculum learning and randomisation.
+          </li>
+          <li>
+            <strong>Record.</strong> Teacher rollouts recorded at 20 Hz and rendered as 480×480
+            fluoroscopy-style frames into a LeRobot v3.0 dataset, with the robot state, commands, a
+            text instruction and the episode outcome.
+          </li>
+          <li>
+            <strong>Imitate.</strong> SmolVLA (450 M parameters), a vision-language-action model
+            trained on successful episodes only. It sees only what an operator sees — image, text
+            instruction and robot state — and predicts the next 50 robot commands.
+          </li>
+        </ol>
+
+        <h2>A geodesic reward</h2>
         <p>
-          The project was a team effort with Giuseppe Cairone, Alessio Naldoni and Riccardo
-          Panizzolo. We were grateful to the challenge providers, mentors and organizers at Siemens
-          Healthineers, FAU and EELISA for an intense, collaborative event.
+          The previous reward measured the straight-line distance between the wire tip and the goal.
+          In a branching vessel, a tip in the wrong branch can look almost at the goal. We instead
+          measure distance along the centreline tree extracted from the vessel mesh — the path the
+          wire really has to travel — and count an episode as successful when this geodesic distance
+          falls below 5 mm.
         </p>
+        <figure class="figure narrow">
+          <img
+            src="../../assets/img/hackathon/geodesic-reward.png"
+            width="1000"
+            height="721"
+            loading="lazy"
+            alt="Diagram of a bifurcating vessel: the tip and the goal are close in a straight line but far apart along the vessel"
+          />
+          <figcaption>
+            Euclidean versus geodesic distance in a bifurcation: close in a straight line, far along
+            the vessel.
+          </figcaption>
+        </figure>
+
+        <h2>The team</h2>
+        <p>
+          π-SA brought together robotics, computer science and bionics engineering: Alberto Anelli,
+          Giuseppe Cairone, Alessio Naldoni and Riccardo Panizzolo. We are grateful to the challenge
+          providers, mentors and organisers at Siemens Healthineers, FAU and EELISA.
+        </p>
+        <div class="figure-pair">
+          <figure class="figure">
+            <img
+              src="../../assets/img/hackathon/working.jpg"
+              width="1600"
+              height="1200"
+              loading="lazy"
+              alt="Team members working at laptops during the hackathon, with vessel-tree results on screen"
+            />
+            <figcaption>Preparing the results during the hackathon.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img
+              src="../../assets/img/hackathon/team.jpg"
+              width="900"
+              height="1200"
+              loading="lazy"
+              alt="Group photo in front of the Siemens Healthineers hackathon banner"
+            />
+            <figcaption>At the Siemens Healthineers site in Erlangen.</figcaption>
+          </figure>
+        </div>
+
         <div class="article-links">
-          <p class="eyebrow">Further reading</p>
-          <a href="https://my.linkedin.com/company/eelisa-european-university/"
-            >EELISA announcement of the winning teams ↗</a
-          ><a href="https://de.linkedin.com/in/lisa-hyna-2b6367170"
-            >Siemens Healthineers challenge overview ↗</a
-          >
+          <p class="eyebrow">Material & further reading</p>
+          <a href="../../assets/docs/pi-sa-hackathon-slides.pdf"
+            >Final presentation slides (PDF, 0.6 MB) ↗</a
+          ><a href="../medical-robotics.html">Medical robotics projects ↗</a
+          ><a href="https://eelisa.eu/">EELISA European University ↗</a
+          ><a href="https://www.siemens-healthineers.com/">Siemens Healthineers ↗</a>
         </div>
       </article>
     </main>
