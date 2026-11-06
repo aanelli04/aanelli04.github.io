@@ -70,8 +70,7 @@ body {
   color: var(--ink);
   font: 16px/1.65 var(--sans);
   background-color: var(--bg);
-  background-image:
-    linear-gradient(#9bbccc0c 1px, transparent 1px),
+  background-image: linear-gradient(#9bbccc0c 1px, transparent 1px),
     linear-gradient(90deg, #9bbccc0c 1px, transparent 1px),
     radial-gradient(ellipse at 75% 0%, #1e5b9624, transparent 48%);
   background-size:
@@ -239,6 +238,41 @@ button {
   border-color: var(--accent);
 }
 
+/* "Open to PhD positions" badge */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 7px 14px 7px 12px;
+  font: 12px var(--mono);
+  letter-spacing: 0.04em;
+  color: #d8f5f4;
+  background: #45c4d414;
+  border: 1px solid #45c4d455;
+  border-radius: 999px;
+}
+
+.status:hover {
+  border-color: var(--accent);
+}
+
+.status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px #45c4d42a;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 7px #45c4d400;
+  }
+}
+
 /* ==========================================================================
    Home — hero & orbit visual
    ========================================================================== */
@@ -273,8 +307,7 @@ h2 em {
   height: 360px;
   overflow: hidden;
   border: 1px solid #45687c;
-  background:
-    radial-gradient(ellipse at 50% 52%, #42b5cc55, transparent 48%),
+  background: radial-gradient(ellipse at 50% 52%, #42b5cc55, transparent 48%),
     linear-gradient(145deg, #1e3141, #152f48 60%, #1b4856);
 }
 
@@ -578,6 +611,14 @@ h2 em {
   margin: 0;
   font-size: 14px;
   color: var(--text);
+}
+
+.other-research {
+  padding-top: 0;
+}
+
+.other-research .project-row h2 {
+  font-size: 21px;
 }
 
 .contact-strip {
@@ -907,6 +948,38 @@ h2 em {
   margin: 0 0 15px;
   font-size: 16px;
   color: var(--text);
+}
+
+.project-copy strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.project-copy .text-link {
+  margin-top: 6px;
+}
+
+.project-index {
+  margin: 26px 0 0;
+}
+
+.updates {
+  padding-top: 47px;
+}
+
+.phd-note {
+  max-width: none;
+  margin-top: 56px;
+  border-left: 2px solid var(--accent);
+}
+
+.phd-note p:not(.eyebrow) {
+  max-width: 680px;
+  font-size: 15px;
+}
+
+.phd-note .button {
+  margin-top: 8px;
 }
 
 .update-head {

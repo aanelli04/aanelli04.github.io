@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Medical Robotics — Alberto Anelli</title>
+    <meta
+      name="description"
+      content="Medical robotics research by Alberto Anelli: magnetic actuation for endoscopic devices at Sant’Anna, MRI-compatible soft systems at the Max Planck Institute, and autonomous endovascular navigation."
+    />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <script defer src="../assets/js/main.js"></script>
   </head>
@@ -14,56 +18,136 @@
         Menu
       </button>
       <nav class="nav" id="primary-navigation" aria-label="Main">
-        <a class="" href="../index.html">Home</a><a class="" href="../cv.html">CV</a
-        ><a class="" href="../publications.html">Publications & Awards</a
+        <a href="../index.html">Home</a><a href="../cv.html">CV</a
+        ><a href="../publications.html">Publications & Awards</a
         ><a class="active" aria-current="page" href="../projects.html">Projects</a
-        ><a class="" href="../contacts.html">Contacts</a>
+        ><a href="../contacts.html">Contacts</a>
       </nav>
     </header>
     <main class="wrap page detail">
       <a class="back" href="../projects.html">← All projects</a>
       <div class="intro">
-        <p class="eyebrow">02 / Robotics · Biomedical systems</p>
+        <p class="eyebrow">01 / Medical robotics · Main research focus</p>
         <h1>Robotics for<br /><em>gentler interventions.</em></h1>
         <p class="lead">
-          My work spans local magnetic control at Sant’Anna and MRI-compatible medical systems
-          explored during a 2025 internship at the Max Planck Institute for Intelligent Systems.
+          Three projects, one question: how compact, controllable robotic systems can work safely
+          inside the body — from magnetic actuation at Sant’Anna to MRI-compatible devices at the
+          Max Planck Institute and autonomous endovascular navigation.
         </p>
         <div class="chips">
-          <span>MRI-COMPATIBLE</span><span>SOFT ROBOTICS</span><span>HYPERTHERMIA</span>
+          <span>MAGNETIC ACTUATION</span><span>ENDOSCOPIC DEVICES</span><span>MRI-COMPATIBLE</span
+          ><span>SOFT ROBOTICS</span><span>HYPERTHERMIA</span><span>REINFORCEMENT LEARNING</span
+          ><span>VISION-LANGUAGE-ACTION</span>
         </div>
+        <nav class="journal-menu project-index" aria-label="Projects on this page">
+          <a href="#magnetic">01 · Magnetic actuation</a
+          ><a href="#mri">02 · MRI-compatible systems</a
+          ><a href="#endovascular">03 · Endovascular navigation</a>
+        </nav>
       </div>
-      <section class="project-copy">
+
+      <section class="project-copy" id="magnetic">
         <div>
-          <p class="eyebrow">The work</p>
-          <h2>Engineering at the boundary of <em>care.</em></h2>
+          <p class="eyebrow">01 · Sant’Anna · 2026–present</p>
+          <h2>Magnetic actuation on an <em>endoscopic device.</em></h2>
         </div>
         <div>
           <p>
-            My internship in the Medical Systems group involved designing coils for robotically
-            assisted hyperthermia for tissue ablation, and developing a hydraulically actuated soft
-            catheter for MRI-guided interventions.
+            <strong>The challenge.</strong> Endoscopic devices need actuation that is compact enough
+            to sit on the device itself, while still allowing it to be steered and controlled
+            precisely.
           </p>
           <p>
-            The experience brought together mechanics, materials, control and imaging constraints.
-            My current Sant’Anna research studies local magnetic control strategies using
-            miniaturized coils mounted on an endoscopic device, supervised by Prof. V. Iacovacci.
+            <strong>My work.</strong> As an intern research engineer in Medical Robotics at
+            Sant’Anna School of Advanced Studies, I study local magnetic control strategies using
+            miniaturized coils mounted on an endoscopic device. The project is ongoing: methods and
+            results will be added here as they become shareable.
           </p>
-          <p class="muted">
-            Research Engineer Intern · Sant’Anna School of Advanced Studies · Pisa, 2026–present;
-            RIGI Intern · Stuttgart, 2025.
-          </p>
+          <p class="muted">Supervisor: Prof. V. Iacovacci · Pisa, Italy</p>
+          <a class="text-link" href="posts/magnetic-control.html">Read the field note ↗</a>
         </div>
       </section>
+
+      <section class="project-copy" id="mri">
+        <div>
+          <p class="eyebrow">02 · Max Planck Institute · Jun–Sep 2025</p>
+          <h2>MRI-compatible and <em>soft medical systems.</em></h2>
+        </div>
+        <div>
+          <p>
+            <strong>The challenge.</strong> Treatment and intervention under MRI guidance bring
+            together mechanics, materials, control and imaging constraints: devices must be actuated
+            and controlled while remaining compatible with the scanner.
+          </p>
+          <p>
+            <strong>My work.</strong> As a Robotics Institute Germany (RIGI) intern in the Medical
+            Systems group of the Max Planck Institute for Intelligent Systems, I worked on coils for
+            robotically assisted, on-demand hyperthermia for tissue ablation, and on a hydraulically
+            actuated soft catheter for MRI-guided interventions.
+          </p>
+          <p class="muted">Supervisor: Dr. sc. Jelena Zinnanti · Stuttgart, Germany</p>
+          <a class="text-link" href="posts/rigi.html">Read about the internship ↗</a>
+        </div>
+      </section>
+
+      <section class="project-copy" id="endovascular">
+        <div>
+          <p class="eyebrow">03 · Siemens Healthineers · October 2026</p>
+          <h2>Autonomous <em>endovascular navigation.</em></h2>
+        </div>
+        <div>
+          <p>
+            <strong>The challenge.</strong> Make guidewires and catheters navigate autonomously
+            during endovascular procedures, using only what can be observed at deployment:
+            fluoroscopy images.
+          </p>
+          <p>
+            <strong>Our approach.</strong> With team π-SA we built a parallelized physics simulator
+            to generate demonstrations, trained privileged reinforcement-learning experts with Soft
+            Actor-Critic (SAC), and distilled them into SmolVLA (450M), a vision-language-action
+            policy that steers from fluoroscopy images and text instructions.
+          </p>
+          <p>
+            <strong>Result.</strong> First prize in the endovascular robotics challenge and in the
+            overall Siemens Healthineers Robotics & AI Hackathon.
+          </p>
+          <p class="muted">
+            Team: Giuseppe Cairone, Alessio Naldoni, Riccardo Panizzolo and Alberto Anelli ·
+            Erlangen, Germany
+          </p>
+          <a class="text-link" href="posts/siemens-hackathon.html">Read the story ↗</a>
+        </div>
+      </section>
+
       <section class="updates">
         <div class="update-head">
           <div>
             <p class="eyebrow">Field notes</p>
             <h2>Project updates</h2>
           </div>
-          <span>Duplicate a post block to add a dated update.</span>
+          <span>Newest first</span>
         </div>
         <!-- Add an update: duplicate an article.update-post block, edit date and text, and place it at the top. -->
+        <article class="update-post">
+          <time>October 2026</time>
+          <div>
+            <h3>First prize at the Siemens Healthineers Robotics & AI Hackathon</h3>
+            <p>
+              Team π-SA won the endovascular robotics challenge and the overall competition in
+              Erlangen with an autonomous guidewire and catheter navigation approach.
+            </p>
+          </div>
+        </article>
+        <article class="update-post">
+          <time>2026</time>
+          <div>
+            <h3>Medical Robotics at Sant’Anna</h3>
+            <p>
+              Started as an intern research engineer, studying local magnetic control with
+              miniaturized coils on an endoscopic device.
+            </p>
+          </div>
+        </article>
         <article class="update-post">
           <time>Summer 2025</time>
           <div>
@@ -76,13 +160,23 @@
           </div>
         </article>
       </section>
+
+      <aside class="note phd-note">
+        <p class="eyebrow">Looking ahead</p>
+        <h2>Looking for a PhD in medical robotics</h2>
+        <p>
+          I am looking for PhD positions starting after my MSc (expected October 2027), in areas
+          such as magnetic actuation, MRI-compatible and soft medical devices, and learning-based
+          control for interventional robotics.
+        </p>
+        <a class="button dark" href="../contacts.html">Get in touch ↗</a>
+      </aside>
     </main>
     <footer class="footer wrap">
       <span>© <span data-year></span> Alberto Anelli</span
       ><span>Built for curiosity, shared openly.</span>
       <div>
-        <a href="https://www.linkedin.com/in/alberto-anelli">LinkedIn ↗</a
-        ><a href="https://github.com/aanelli04">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/alberto-anelli">LinkedIn ↗</a>
       </div>
     </footer>
   </body>
