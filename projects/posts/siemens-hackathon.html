@@ -112,33 +112,12 @@
           </li>
         </ol>
 
-        <h2>A geodesic reward</h2>
-        <p>
-          The previous reward measured the straight-line distance between the wire tip and the goal.
-          In a branching vessel, a tip in the wrong branch can look almost at the goal. We instead
-          measure distance along the centreline tree extracted from the vessel mesh — the path the
-          wire really has to travel — and count an episode as successful when this geodesic distance
-          falls below 5 mm.
-        </p>
-        <figure class="figure narrow">
-          <img
-            src="../../assets/img/hackathon/geodesic-reward.png"
-            width="1000"
-            height="721"
-            loading="lazy"
-            alt="Diagram of a bifurcating vessel: the tip and the goal are close in a straight line but far apart along the vessel"
-          />
-          <figcaption>
-            Euclidean versus geodesic distance in a bifurcation: close in a straight line, far along
-            the vessel.
-          </figcaption>
-        </figure>
-
         <h2>The team</h2>
         <p>
           π-SA brought together robotics, computer science and bionics engineering: Alberto Anelli,
           Giuseppe Cairone, Alessio Naldoni and Riccardo Panizzolo. We are grateful to the challenge
-          providers, mentors and organisers at Siemens Healthineers, FAU and EELISA.
+          owners Matteo Pantano and Leon Wildt, and to the mentors and organisers at Siemens
+          Healthineers, FAU and EELISA.
         </p>
         <div class="figure-pair">
           <figure class="figure">
@@ -157,9 +136,123 @@
               width="900"
               height="1200"
               loading="lazy"
-              alt="Group photo in front of the Siemens Healthineers hackathon banner"
+              alt="Team π-SA with challenge owners Matteo Pantano and Leon Wildt in front of the Siemens Healthineers hackathon banner"
             />
-            <figcaption>At the Siemens Healthineers site in Erlangen.</figcaption>
+            <figcaption>
+              Team π-SA with the challenge owners Matteo Pantano and Leon Wildt, Siemens
+              Healthineers, Erlangen.
+            </figcaption>
+          </figure>
+        </div>
+
+        <h2>Simulation videos</h2>
+        <p>
+          Videos from our final presentation. The first shows an extension of the simulator with a
+          therapeutic device: a stent deployed after the target has been reached. The others show
+          navigation episodes in Xcath.
+        </p>
+        <div class="video-grid">
+          <figure class="figure span-2">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="960"
+              height="540"
+              poster="../../assets/video/hackathon/stent-deployment.jpg"
+            >
+              <source src="../../assets/video/hackathon/stent-deployment.mp4" type="video/mp4" />
+            </video>
+            <figcaption>Extension: stent deployment in the simulator.</figcaption>
+          </figure>
+          <figure class="figure">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="768"
+              height="420"
+              poster="../../assets/video/hackathon/navigation-aortic-arch.jpg"
+            >
+              <source
+                src="../../assets/video/hackathon/navigation-aortic-arch.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>
+              Through the aortic arch and the brachiocephalic trunk into the right common carotid
+              artery.
+            </figcaption>
+          </figure>
+          <figure class="figure">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="704"
+              height="480"
+              poster="../../assets/video/hackathon/navigation-branching-tree.jpg"
+            >
+              <source
+                src="../../assets/video/hackathon/navigation-branching-tree.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>Navigation in a branching vessel tree.</figcaption>
+          </figure>
+          <figure class="figure">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="848"
+              height="480"
+              poster="../../assets/video/hackathon/navigation-deep-branch.jpg"
+            >
+              <source
+                src="../../assets/video/hackathon/navigation-deep-branch.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption>Reaching a target in a distal branch.</figcaption>
+          </figure>
+          <figure class="figure">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="960"
+              height="562"
+              poster="../../assets/video/hackathon/goal-3-10x.jpg"
+            >
+              <source src="../../assets/video/hackathon/goal-3-10x.mp4" type="video/mp4" />
+            </video>
+            <figcaption>Navigation to goal 3 (10× speed).</figcaption>
+          </figure>
+          <figure class="figure">
+            <video
+              controls
+              muted
+              playsinline
+              loop
+              preload="none"
+              width="960"
+              height="576"
+              poster="../../assets/video/hackathon/bonus-target-10x.jpg"
+            >
+              <source src="../../assets/video/hackathon/bonus-target-10x.mp4" type="video/mp4" />
+            </video>
+            <figcaption>Navigation to the bonus target (10× speed).</figcaption>
           </figure>
         </div>
 
