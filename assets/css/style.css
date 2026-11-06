@@ -1422,3 +1422,13 @@ h2 em {
     transition-duration: 0.01ms !important;
   }
 }
+
+.figure-pair.even {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 760px) {
+  .figure-pair.even {
+    grid-template-columns: 1fr;
+  }
+}
