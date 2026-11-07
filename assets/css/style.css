@@ -1498,3 +1498,7 @@ h2 em {
   font-size: 13px;
   color: var(--muted);
 }
+
+.pubs .text-link {
+  margin: 4px 18px 0 0;
+}
